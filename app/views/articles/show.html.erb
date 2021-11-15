@@ -1,0 +1,62 @@
+<div class="col col-sm-6 border mt-3 mb-5 mx-auto">
+
+    <h1 class="mx-auto"><%= @article.title %></h1>
+   
+    <div class="col-sm-12 border-top my-3">
+      <p style="word-wrap: break-word;"><%= @article.text %></p>
+    <div class="col-sm-12 border-top my-3" />
+    
+    <h2>Comments</h2>
+    
+    <% @article.comments.each do |comment| %>
+
+      <p>
+        <strong>Commenter:</strong>
+        <%= comment.commenter %>
+      </p>
+     
+      <p>
+        <strong>Comment:</strong>
+        <%= comment.body %>
+      </p>
+
+      <%= link_to 'Delete Comment', [comment.article, comment],
+        method: :delete,
+        data: { confirm: 'Are you sure?' } 
+      %>
+
+    <% end %>
+
+    <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+      
+      <h3>Add a comment:</h3>
+      
+      <div class="col col-sm-4">
+
+        <div class="my-3">
+          <label for="commenter">User Name:</label>
+          <%= form.text_field :commenter, class: 'form-control' %>
+        </div>
+       
+        <div class="my-3">
+          <label for="body">Comment:</label>
+          <%= form.text_area :body, class: "text form-control" %>
+        </div>
+       
+        <%= form.submit class:"btn btn-primary" %>
+
+      </div>
+
+    <% end %>
+  
+    <div class="col-sm-12 border-top my-3 py-3" />
+
+      <%= link_to 'Edit Post', edit_article_path(@article), class:"btn btn-primary" %>
+      <%= link_to 'Delete Post', article_path(@article), class:"btn btn-danger",
+        method: :delete,
+        data: { confirm: 'Are you sure?' } 
+      %>
+
+    </div>
+
+</div>

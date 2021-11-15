@@ -1,0 +1,33 @@
+<div class="col col-sm-4 mx-auto">
+  <h1 class="mb-4">Edit Post</h1> 
+  <%= form_with(model: @article, local: true) do |form| %>
+   
+    <% if @article.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@article.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h2>
+        <ul>
+          <% @article.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+      <div class="my-3">
+        <label for="title">Title:</label>
+        <%= form.text_field :title, class: 'form-control' %>
+      </div>
+     
+      <div class="my-3">
+        <label for="text">Content:</label>
+        <%= form.text_area :text, class: "text form-control" %>
+      </div>
+     
+      <%= form.submit "Update Post", class:"btn btn-primary" %>
+   
+    <%= link_to 'Back', article_path(@article), class:"btn btn-primary" %>
+  <% end %>
+</div>

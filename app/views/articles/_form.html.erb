@@ -1,0 +1,11 @@
+<div class="my-3">
+      <label for="title">Title:</label>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+   
+    <div class="my-3">
+      <label for="text">Content:</label>
+      <%= form.text_area :text, class: "text form-control" %>
+    </div>
+   
+    <%= form.submit class:"btn btn-primary" %>
